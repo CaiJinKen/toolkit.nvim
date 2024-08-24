@@ -60,6 +60,7 @@ go install github.com/ChimeraCoder/gojson@v1.1.0
 ## vimscript user 
 
 If you just want fillstruct or gojson, you can use:
+
 [vim-fillstruct](https://github.com/CaiJinKen/vim-fillstruct)
 
 [vim-sortimport](https://github.com/CaiJinKen/vim-sortimport)
