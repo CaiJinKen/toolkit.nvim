@@ -11,7 +11,7 @@ toolkit includes:
 
 filetypes:
 - [x] go
-- [] waiting for
+- [ ] waiting for other filetype
 
 ## Install
 
@@ -51,11 +51,12 @@ jsongo:
 go install github.com/ChimeraCoder/gojson@v1.1.0
 ```
 
-| command       | desc                                      | detail                 |
-| ------------- | --------------                            | --------------         |
-| :GenSwag      | go-swag doc generator                     | above the coursor line |
-| :FillStruct   | fill all fields for empty object          | under the coursor line |
-| :JsonToGo     | generate go struct from json/yaml content | replace selection      |
+| command       | desc                                 | detail                 |
+| ------------- | --------------                       | --------------         |
+| :GenSwag      | go-swag doc generator                | above the coursor line |
+| :FillStruct   | fill all fields for empty object     | under the coursor line |
+| :JsonToGo     | generate go struct from json content | replace selection      |
+| :YamlToGo     | generate go struct from yaml content | replace selection      |
 
 ## vimscript user 
 
