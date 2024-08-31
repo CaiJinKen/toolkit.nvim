@@ -1,10 +1,50 @@
-local M = {}
+local M = {
+	urls = {
+		gomodifytags = "github.com/fatih/gomodifytags",
+		fillstruct = "github.com/CaiJinKen/fillstruct",
+		gojson = "github.com/ChimeraCoder/gojson",
+	},
+}
 
 local f = require("toolkit.file")
+local log = require("toolkit.log")
+local conf = require("toolkit.settings")
+
+-- install pkg
+function M.async_install(pkg)
+	local cmd = "go install " .. M.urls[pkg] .. "@latest"
+	log.info({ "installing", pkg })
+
+	local function on_exit(job_id, exit_code, event)
+		if exit_code == 0 then
+			log.info({ pkg, "install success!" })
+		else
+			log.error({ pkg, "install failed!" })
+		end
+	end
+
+	local job_id = vim.fn.jobstart(cmd, {
+		on_exit = on_exit,
+		stdout_buffered = true,
+	})
+
+	if job_id <= 0 then
+		log.error({ "run install", pkg, "job failed!" })
+	end
+end
+
+-- install dependencies
+function M.install_deps()
+	for pkg, _ in pairs(M.urls) do
+		if f.is_executable(pkg) ~= true then
+			M.async_install(pkg)
+		end
+	end
+end
 
 function M.exec_check_failed(program)
 	if f.is_executable(program) ~= true then
-		vim.notify(program .. " not exist or executable.", vim.log.levels.ERROR, {})
+		log.error({ program, "not exist or executable." })
 		return true
 	end
 	return false
@@ -74,6 +114,75 @@ function M.to_struct(format, firstline, lastline)
 	}
 
 	vim.cmd(tostring(firstline) .. "," .. tostring(lastline) .. " " .. table.concat(cmd, " "))
+end
+
+function M.tags_opt(params)
+	local cmd = {
+		"!gomodifytags",
+		"-file " .. vim.fn.expand("%"),
+		"-transform " .. conf.current.go.tags_transform,
+	}
+	for _, v in pairs(params) do
+		table.insert(cmd, v)
+	end
+	vim.cmd("%" .. table.concat(cmd, " "))
+end
+
+-- add tags to lines in range
+-- eg : json,yaml
+function M.tags_add_lines(tags, firstline, lastline)
+	if type(tags) ~= "string" then
+		return
+	end
+
+	if #tags == 0 then
+		tags = "json"
+	end
+
+	M.tags_opt({
+		"-line " .. tostring(firstline) .. "," .. tostring(lastline),
+		"-add-tags " .. tags,
+	})
+end
+
+-- clear tags to lines in range
+function M.tags_clear_lines(firstline, lastline)
+	M.tags_opt({
+		"-line " .. tostring(firstline) .. "," .. tostring(lastline),
+		"-clear-tags",
+	})
+end
+
+-- remove tags on the line
+function M.tags_remove_lines(tags, firstline, lastline)
+	M.tags_opt({
+		"-line " .. tostring(firstline) .. "," .. tostring(lastline),
+		"-remove-tags " .. tags,
+	})
+end
+
+-- add options to tags
+function M.tags_add_opts(opts, firstline, lastline)
+	M.tags_opt({
+		"-line " .. tostring(firstline) .. "," .. tostring(lastline),
+		"-add-options " .. opts,
+	})
+end
+
+-- clear all tas`s options
+function M.tags_clear_opts(firstline, lastline)
+	M.tags_opt({
+		"-line " .. tostring(firstline) .. "," .. tostring(lastline),
+		"-clear-options",
+	})
+end
+
+-- remove tags` options
+function M.tags_remove_opts(opts, firstline, lastline)
+	M.tags_opt({
+		"-line " .. tostring(firstline) .. "," .. tostring(lastline),
+		"-remove-options " .. opts,
+	})
 end
 
 return M

@@ -2,13 +2,21 @@ local M = {}
 
 local DEFAULT_SETTINGS = {
 	go = {
-		enabled = true,
-		enabled_cmds = {
+		enable = true,
+		auto_install = true,
+		enable_cmds = {
 			"GenSwag",
 			"FillStruct",
 			"JsonToGo",
 			"YamlToGo",
+			"AddTags",
+			"DelTags",
+			"ClearTags",
+			"AddTagOpts",
+			"DelTagOpts",
+			"ClearTagOpts",
 		},
+		tags_transform = "snakecase", -- options: [snakecase, camelcase, lispcase, pascalcase, titlecase, keep]
 	},
 }
 
