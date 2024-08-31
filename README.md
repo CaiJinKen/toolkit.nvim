@@ -189,7 +189,8 @@ assume you have file named user.go and contains json text and(or) other code
 ```go
 // some go code above 
 {
-    "name":"Rechard",
+    "first_name":"aaa",
+    "last_name":"bbb",
     "age":30,
     "addrs":["aaa","bbb","ccc"]
 }
@@ -237,7 +238,7 @@ you can select fields you want to add tags by press `v` + `j` or `k`, or all fie
 2.     FirstName string
 3.     LastName  string
 4.     Age       uint     `json:"age" yaml:"age" uri:"age"`
-5.	   Addrs     []string `json:"addrs" yaml:"addrs" uri:"addrs"`
+5.     Addrs     []string `json:"addrs" yaml:"addrs" uri:"addrs"`
 6. }
 ```
 
@@ -248,7 +249,7 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 2.     FirstName string
 3.     LastName  string
 4.     Age       uint     `yaml:"age"`
-5.	   Addrs     []string `json:"addrs" yaml:"addrs" uri:"addrs"`
+5.     Addrs     []string `json:"addrs" yaml:"addrs" uri:"addrs"`
 6. }
 ```
 
@@ -258,7 +259,7 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 2.     FirstName string
 3.     LastName  string
 4.     Age       uint     `yaml:"age"`
-5.	   Addrs     []string
+5.     Addrs     []string
 6. }
 ```
 
@@ -268,7 +269,7 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 2.     FirstName string
 3.     LastName  string
 4.     Age       uint `yaml:"age,omitempty,aaa,bbb"`
-5.	   Addrs     []string
+5.     Addrs     []string
 6. }
 ```
 
@@ -278,7 +279,7 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 2.     FirstName string
 3.     LastName  string
 4.     Age       uint `yaml:"age,omitempty"`
-5.	   Addrs     []string
+5.     Addrs     []string
 6. }
 ```
 
@@ -288,7 +289,7 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 2.     FirstName string
 3.     LastName  string
 4.     Age       uint `yaml:"age"`
-5.	   Addrs     []string
+5.     Addrs     []string
 6. }
 ```
 
@@ -310,22 +311,22 @@ default configuration:
 require("toolkit").setup({
     go = {
         -- go filetype commands will not set if value is false
-		enable = true,
+        enable = true,
         -- whether install programs
-		auto_install = true,
-		enable_cmds = {
-			"GenSwag",
-			"FillStruct",
-			"JsonToGo",
-			"YamlToGo",
-			"AddTags",
-			"DelTags",
-			"ClearTags",
-			"AddTagOpts",
-			"DelTagOpts",
-			"ClearTagOpts",
-		},
-		tags_transform = "snakecase", -- options: [snakecase, camelcase, lispcase, pascalcase, titlecase, keep]
-	}
+        auto_install = true,
+        enable_cmds = {
+            "GenSwag",
+            "FillStruct",
+            "JsonToGo",
+            "YamlToGo",
+            "AddTags",
+            "DelTags",
+            "ClearTags",
+            "AddTagOpts",
+            "DelTagOpts",
+            "ClearTagOpts",
+        },
+        tags_transform = "snakecase", -- options: [snakecase, camelcase, lispcase, pascalcase, titlecase, keep]
+    }
 })
 ```
