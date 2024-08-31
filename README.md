@@ -2,7 +2,7 @@
 
 toolkit include two class: **utils** & **filetype functions** (only go for now)
 
-**any good ideal or useful PR are wellcome!!!**
+**any good ideal or useful PR are wellcome!!!** ❤️
 
 toolkit includes:
 - [x] file
@@ -22,7 +22,7 @@ filetypes:
 ```lua
 {
     "CaiJinKen/toolkit.nvim",
-    tag = "v0.1.0",
+    tag = "v0.1.1",
     ft = ["go","lua"],
 }
 ```
@@ -31,7 +31,7 @@ filetypes:
 ```lua
 use({
     "CaiJinKen/toolkit.nvim",
-    tag = "v0.1.0",
+    tag = "v0.1.1",
 })
 ```
 
@@ -72,18 +72,18 @@ go install github.com/fatih/gomodifytags@v1.17.0
 
 ### commands
 
-| command       | desc                                 | detail                         |
-| ------------- | --------------                       | --------------                 |
-| :GenSwag      | go-swag doc generator                | above the coursor line         |
-| :FillStruct   | fill all fields for empty object     | under the coursor line         |
-| :JsonToGo     | generate go struct from json content | replace selection              |
-| :YamlToGo     | generate go struct from yaml content | replace selection              |
-| :AddTags      | add tags to struct fields            | current line or selection eara |
-| :DelTags      | remove tags from struct fields       | current line or selection eara |
-| :ClearTags    | clear all tags from struct fields    | current line or selection eara |
-| :AddTagOpts   | add options to tags                  | current line or selection eara |
-| :DelTagOpts   | remove options from tags             | current line or selection eara |
-| :ClearTags    | clear options from tags              | current line or selection eara |
+| command       | desc                                 | detail                        |
+| ------------- | --------------                       | --------------                |
+| :GenSwag      | go-swag doc generator                | above the coursor line        |
+| :FillStruct   | fill all fields for empty object     | under the coursor line        |
+| :JsonToGo     | generate go struct from json content | replace selection             |
+| :YamlToGo     | generate go struct from yaml content | replace selection             |
+| :AddTags      | add tags to struct fields            | current line or selected area |
+| :DelTags      | remove tags from struct fields       | current line or selected area |
+| :ClearTags    | clear all tags from struct fields    | current line or selected area |
+| :AddTagOpts   | add options to tags                  | current line or selected area |
+| :DelTagOpts   | remove options from tags             | current line or selected area |
+| :ClearTags    | clear options from tags              | current line or selected area |
 
 #### examples 
 
