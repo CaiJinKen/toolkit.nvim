@@ -9,6 +9,7 @@ local M = {
 local f = require("toolkit.file")
 local log = require("toolkit.log")
 local conf = require("toolkit.settings")
+local spec = require("toolkit.go_spec")
 
 -- install pkg
 function M.async_install(pkg)
@@ -107,11 +108,17 @@ function M.to_struct(format, firstline, lastline)
 	local name = f.get_current_buffer_file_name()
 
 	local cmd = {
-		"!gojson",
+		"!gojson -subStruct",
 		"-fmt " .. format,
 		"-name " .. f.remove_extension(name),
-		"-pkg " .. f.get_current_buffer_parent_name(),
 	}
+
+	local package_name = spec.current_package_name()
+	print("package_name", package_name)
+	if not package_name or type(package_name) ~= "string" then
+		package_name = spec.fix_package_name(f.get_current_buffer_parent_name())
+	end
+	table.insert(cmd, "-pkg " .. package_name)
 
 	vim.cmd(tostring(firstline) .. "," .. tostring(lastline) .. " " .. table.concat(cmd, " "))
 end

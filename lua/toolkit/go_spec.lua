@@ -25,4 +25,25 @@ function M.current_func_name()
 	return M.get_spec_name("^%s*func%s+", "^%s*func%s+[%w%*%s%(%)]*%s*([%w_]+)%s*%(")
 end
 
+-- get current package name
+function M.current_package_name()
+	local line_count = vim.api.nvim_buf_line_count(0)
+	local lines = vim.api.nvim_buf_get_lines(0, 0, line_count, false)
+
+	for _, line in ipairs(lines) do
+		local package_name = line:match("^package%s+(%S+)")
+		if package_name then
+			return package_name
+		end
+	end
+end
+
+function M.fix_package_name(name)
+	if not name then
+		return
+	end
+	name = name:gsub("-", "")
+	return name
+end
+
 return M

@@ -293,6 +293,26 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 6. }
 ```
 
+#### keymaps
+toolkit does not define any keymaps. If you want use keymaps instead of command, you can define your keymaps eg: map `<leader>at` to `:AddTags json,yaml`:
+
+* vimscript config
+```vim
+" normal mode keymap
+nnoremap <leader>at :AddTags json,yaml<cr>
+" select mode keymap
+xnoremap <leader>at :AddTags json,yaml<cr>
+```
+
+* lua config
+```lua
+-- normal mode keymap
+vim.api.nvim_set_keymap('n', '<leader>at', ':AddTags json,yaml<CR>', {noremap = true})
+-- select mode keymap
+vim.api.nvim_set_keymap('x', '<leader>at', ':AddTags json,yaml<CR>', {noremap = true})
+
+```
+
 ## vimscript user 
 
 If you just want fillstruct or gojson, you can use:
@@ -302,6 +322,8 @@ If you just want fillstruct or gojson, you can use:
 [vim-sortimport](https://github.com/CaiJinKen/vim-sortimport)
 
 [vim-jsontogo](https://github.com/meain/vim-jsontogo)
+
+[coc-go](https://github.com/josa42/coc-go)
 
 ## configuration
 
