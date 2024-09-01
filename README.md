@@ -57,17 +57,17 @@ go = {
 
 fillstruct:
 ```sh
-go install github.com/CaiJinKen/fillstruct@v0.1.1
+go install github.com/CaiJinKen/fillstruct@latest
 ```
 
 jsongo:
 ```sh
-go install github.com/ChimeraCoder/gojson@v1.1.0
+go install github.com/ChimeraCoder/gojson@latest
 ```
 
 gomodifytags:
 ```sh
-go install github.com/fatih/gomodifytags@v1.17.0
+go install github.com/fatih/gomodifytags@latest
 ```
 
 ### commands
