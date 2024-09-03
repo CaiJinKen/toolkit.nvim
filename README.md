@@ -1,10 +1,11 @@
-# toolkit.nvim neovim lua toolkit
+# 💻 toolkit.nvim neovim lua toolkit
 
 toolkit include two class: **utils** & **filetype functions** (only go for now)
 
-**any good ideal or useful PR are wellcome!!!** ❤️
+**any good ideal or useful PR are welcome!!!** ❤️
 
 toolkit includes:
+
 - [x] file
 - [x] vim
 - [x] string
@@ -13,12 +14,14 @@ toolkit includes:
 - [x] misc
 
 filetypes:
+
 - [x] go
 - [ ] waiting for other filetype
 
-## Install
+## 📦 Install
 
-* lazy
+- lazy
+
 ```lua
 {
     "CaiJinKen/toolkit.nvim",
@@ -27,7 +30,8 @@ filetypes:
 }
 ```
 
-* Packer
+- Packer
+
 ```lua
 use({
     "CaiJinKen/toolkit.nvim",
@@ -35,16 +39,20 @@ use({
 })
 ```
 
-* vim-plug
+- vim-plug
+
 ```lua
 Plug "CaiJinKen/toolkit.nvim"
 ```
 
-## spec function
+## 🙎 Spec Function
 
 ### go
+
 go dependencies can be install automatically or install by manual.
-* auto install(default)
+
+- auto install(default)
+
 ```lua
 go = {
     ...
@@ -53,41 +61,44 @@ go = {
 }
 ```
 
-* manual install
+- manual install
 
 fillstruct:
+
 ```sh
 go install github.com/CaiJinKen/fillstruct@latest
 ```
 
 jsongo:
+
 ```sh
 go install github.com/ChimeraCoder/gojson@latest
 ```
 
 gomodifytags:
+
 ```sh
 go install github.com/fatih/gomodifytags@latest
 ```
 
-### commands
+### 🔑 Commands
 
-| command       | desc                                 | detail                        |
-| ------------- | --------------                       | --------------                |
-| :GenSwag      | go-swag doc generator                | above the coursor line        |
-| :FillStruct   | fill all fields for empty object     | under the coursor line        |
-| :JsonToGo     | generate go struct from json content | replace selection             |
-| :YamlToGo     | generate go struct from yaml content | replace selection             |
-| :AddTags      | add tags to struct fields            | current line or selected area |
-| :DelTags      | remove tags from struct fields       | current line or selected area |
-| :ClearTags    | clear all tags from struct fields    | current line or selected area |
-| :AddTagOpts   | add options to tags                  | current line or selected area |
-| :DelTagOpts   | remove options from tags             | current line or selected area |
-| :ClearTags    | clear options from tags              | current line or selected area |
+| command     | desc                                 | detail                        |
+| ----------- | ------------------------------------ | ----------------------------- |
+| :GenSwag    | go-swag doc generator                | above the coursor line        |
+| :FillStruct | fill all fields for empty object     | under the coursor line        |
+| :JsonToGo   | generate go struct from json content | replace selection             |
+| :YamlToGo   | generate go struct from yaml content | replace selection             |
+| :AddTags    | add tags to struct fields            | current line or selected area |
+| :DelTags    | remove tags from struct fields       | current line or selected area |
+| :ClearTags  | clear all tags from struct fields    | current line or selected area |
+| :AddTagOpts | add options to tags                  | current line or selected area |
+| :DelTagOpts | remove options from tags             | current line or selected area |
+| :ClearTags  | clear options from tags              | current line or selected area |
 
-#### examples 
+#### 💫 Examples
 
-* **`:GenSwag`** generate go-swag api doc for swagger
+- **`:GenSwag`** generate go-swag api doc for swagger
 
 ```go
 1. package handler
@@ -98,7 +109,8 @@ go install github.com/fatih/gomodifytags@latest
 6. }
 ```
 
-set coursor to line 2 then exec `:GenSwag` , go-swag doc will be added, then you can change template by use `w` `f` `diw` etc.
+set coursor to line 2 then exec `:GenSwag` , go-swag doc will be added, then you
+can change template by use `w` `f` `diw` etc.
 
 ```go
 package handler
@@ -124,8 +136,14 @@ func AddUser(ctx *gin.Context){
 }
 ```
 
-* **`:FillStruct`** fill empty struct variable, including global/local/internal func
+- **`:FillStruct`** fill empty struct variable, including global/local/internal
+  func
+
+> if you use gopls, you can use fillstruct function of gopls by set
+> `staticcheck = true` too.
+
 local variable:
+
 ```go
 package model
 
@@ -142,30 +160,35 @@ func something() {
     u := User{}
     fmt.Println(u)
 }
-
 ```
 
 set coursor to line with `u := User{}`, then exec `:FillStruct`
+
 ```go
 func something() {
     u := User{FirstName: "", LastName: "", Age: 0, Addrs: []string{}}
     fmt.Println(u)
 }
-
 ```
+
 global variable
+
 ```go
 package model
 
 var u = User{}
 ```
+
 move coursor to the line with `var u = User{}`, and exec `:FillStruct`
+
 ```go
 package model
 
 var u = User{FirstName: "", LastName: "", Age: 0, Addrs: []string{}}
 ```
+
 internal func
+
 ```go
 1. func something()func(){
 2.     return func(){
@@ -174,7 +197,9 @@ internal func
 5.     }
 6. }
 ```
+
 move coursor to line 3 and exec `:FillStruct`
+
 ```go
 func something()func(){
     return func(){
@@ -184,8 +209,9 @@ func something()func(){
 }
 ```
 
-* **`:JsonToGo`** convert json to golang struct
-assume you have file named user.go and contains json text and(or) other code
+- **`:JsonToGo`** convert json to golang struct assume you have file named
+  user.go and contains json text and(or) other code
+
 ```go
 // some go code above 
 {
@@ -197,7 +223,9 @@ assume you have file named user.go and contains json text and(or) other code
 
 // other go code below
 ```
+
 press `v` to select hole json text, then exec `:JsonToGo`
+
 ```go
 // some go code above 
 type User struct {
@@ -208,12 +236,12 @@ type User struct {
 }
 
 // other go code below
-
 ```
 
-* **`:YamlToGo`** same as **`:JsonToGo`** but yaml style
+- **`:YamlToGo`** same as **`:JsonToGo`** but yaml style
 
-* **`:AddTags`** add tags to struct single line or selected fields
+- **`:AddTags`** add tags to struct single line or selected fields
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -222,7 +250,10 @@ type User struct {
 5.     Addrs     []string
 6. }
 ```
-set coursor to line 4 and exec `:AddTags json,yaml,uri`, you can set what tags you want, comma split
+
+set coursor to line 4 and exec `:AddTags json,yaml,uri`, you can set what tags
+you want, comma split
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -232,7 +263,9 @@ set coursor to line 4 and exec `:AddTags json,yaml,uri`, you can set what tags y
 6. }
 ```
 
-you can select fields you want to add tags by press `v` + `j` or `k`, or all fields with `vi{`, then exec the command. eg select lines 4 and 5
+you can select fields you want to add tags by press `v` + `j` or `k`, or all
+fields with `vi{`, then exec the command. eg select lines 4 and 5
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -242,8 +275,9 @@ you can select fields you want to add tags by press `v` + `j` or `k`, or all fie
 6. }
 ```
 
-* **`:DelTags`** delete spec tags 
-line to 4, then exec `:DelTags json,uri`. selection supported also
+- **`:DelTags`** delete spec tags line to 4, then exec `:DelTags json,uri`.
+  selection supported also
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -253,7 +287,9 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 6. }
 ```
 
-* **`:ClearTags`**  clear all tags & options in current line or selection. **with no tags type in**. eg line to 5 and exec command
+- **`:ClearTags`** clear all tags & options in current line or selection. **with
+  no tags type in**. eg line to 5 and exec command
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -263,7 +299,9 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 6. }
 ```
 
-* **`:AddTagOpts`** add options to tags. eg line to 4 and exec `:AddTagOpts yaml=omitempty,yaml=aaa,yaml=bbb`
+- **`:AddTagOpts`** add options to tags. eg line to 4 and exec
+  `:AddTagOpts yaml=omitempty,yaml=aaa,yaml=bbb`
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -273,7 +311,9 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 6. }
 ```
 
-* **`:DelTagOpts`** remove options. eg line to 4 and exec `:DelTagOpts yaml=aaa,yaml=bbb`
+- **`:DelTagOpts`** remove options. eg line to 4 and exec
+  `:DelTagOpts yaml=aaa,yaml=bbb`
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -283,7 +323,8 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 6. }
 ```
 
-* **`:ClearTagOpts`** clear all options. eg line to 4 and exec `:ClearTagOpts`
+- **`:ClearTagOpts`** clear all options. eg line to 4 and exec `:ClearTagOpts`
+
 ```go
 1. type User struct {
 2.     FirstName string
@@ -293,10 +334,13 @@ line to 4, then exec `:DelTags json,uri`. selection supported also
 6. }
 ```
 
-#### keymaps
-toolkit does not define any keymaps. If you want use keymaps instead of command, you can define your keymaps eg: map `<leader>at` to `:AddTags json,yaml`:
+#### ⌨️ Keymaps
 
-* vimscript config
+toolkit does not define any keymaps. If you want use keymaps instead of command,
+you can define your keymaps eg: map `<leader>at` to `:AddTags json,yaml`:
+
+- vimscript config
+
 ```vim
 " normal mode keymap
 nnoremap <leader>at :AddTags json,yaml<cr>
@@ -304,16 +348,14 @@ nnoremap <leader>at :AddTags json,yaml<cr>
 xnoremap <leader>at :AddTags json,yaml<cr>
 ```
 
-* lua config
-```lua
--- normal mode keymap
-vim.api.nvim_set_keymap('n', '<leader>at', ':AddTags json,yaml<CR>', {noremap = true})
--- select mode keymap
-vim.api.nvim_set_keymap('x', '<leader>at', ':AddTags json,yaml<CR>', {noremap = true})
+- lua config
 
+```lua
+-- normal & select mode keymap
+vim.api.nvim_set_keymap({'n','x'}, '<leader>at', ':AddTags json,yaml<CR>', {noremap = true})
 ```
 
-## vimscript user 
+## 💚 vimscript user
 
 If you just want fillstruct or gojson, you can use:
 
@@ -325,7 +367,7 @@ If you just want fillstruct or gojson, you can use:
 
 [coc-go](https://github.com/josa42/coc-go)
 
-## configuration
+## ⚙️ configuration
 
 default configuration:
 
